@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Garrison Housing Solutions — Poznań, Poland</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,300&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --olive: #3d4a2e;
+    --olive-dark: #252e1c;
+    --olive-light: #5a6b44;
+    --tan: #c9b89a;
+    --tan-light: #e8ddd0;
+    --cream: #f5f0e8;
+    --sand: #d4c5a9;
+    --charcoal: #1a1f14;
+    --white: #fdfcf9;
+    --accent: #b5873a;
+    --accent-light: #d4a855;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--charcoal);
+    overflow-x: hidden;
+  }
+
+  .hero {
+    min-height: 100vh;
+    background: var(--olive-dark);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      repeating-linear-gradient(0deg, transparent, transparent 40px, rgba(255,255,255,0.015) 40px, rgba(255,255,255,0.015) 41px),
+      repeating-linear-gradient(90deg, transparent, transparent 40px, rgba(255,255,255,0.015) 40px, rgba(255,255,255,0.015) 41px);
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0; right: 0;
+    height: 120px;
+    background: linear-gradient(to bottom right, var(--olive-dark) 49%, var(--cream) 50%);
+  }
+
+  .hero-inner {
+    position: relative;
+    z-index: 2;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 80px 40px 120px;
+  }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(181,135,58,0.15);
+    border: 1px solid rgba(181,135,58,0.4);
+    color: var(--accent-light);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    margin-bottom: 32px;
+    animation: fadeUp 0.6s ease both;
+  }
+
+  .badge::before { content: '★'; font-size: 9px; }
+
+  .hero h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(52px, 8vw, 110px);
+    line-height: 0.92;
+    color: var(--white);
+    letter-spacing: 1px;
+    margin-bottom: 12px;
+    animation: fadeUp 0.6s 0.1s ease both;
+  }
+
+  .hero h1 span { color: var(--accent-light); display: block; }
+
+  .hero-sub {
+    font-family: 'Source Serif 4', serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: clamp(16px, 2vw, 22px);
+    color: var(--sand);
+    margin: 24px 0 48px;
+    max-width: 560px;
+    line-height: 1.6;
+    animation: fadeUp 0.6s 0.2s ease both;
+  }
+
+  .hero-ctas { display: flex; gap: 16px; flex-wrap: wrap; animation: fadeUp 0.6s 0.3s ease both; }
+
+  .btn-primary {
+    background: var(--accent);
+    color: var(--white);
+    padding: 16px 36px;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .btn-primary:hover { background: var(--accent-light); transform: translateY(-2px); }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--tan-light);
+    padding: 16px 36px;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: 1px solid rgba(201,184,154,0.4);
+    cursor: pointer;
+    transition: border-color 0.2s, color 0.2s, transform 0.15s;
+  }
+  .btn-outline:hover { border-color: var(--tan); color: var(--white); transform: translateY(-2px); }
+
+  .trust-bar {
+    background: var(--accent);
+    padding: 18px 40px;
+    display: flex;
+    justify-content: center;
+    gap: 60px;
+    flex-wrap: wrap;
+  }
+
+  .trust-item {
+    color: var(--white);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .trust-item::before { content: '✓'; font-size: 14px; font-weight: 700; }
+
+  section { max-width: 1100px; margin: 0 auto; padding: 100px 40px; }
+
+  .section-label {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 16px;
+  }
+
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(36px, 5vw, 60px);
+    line-height: 1;
+    color: var(--olive-dark);
+    margin-bottom: 20px;
+    letter-spacing: 0.5px;
+  }
+
+  .section-intro {
+    font-family: 'Source Serif 4', serif;
+    font-weight: 300;
+    font-size: 18px;
+    line-height: 1.7;
+    color: #4a5240;
+    max-width: 600px;
+  }
+
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; margin-top: 60px; }
+
+  .about-text p { font-size: 15px; line-height: 1.8; color: #4a5240; margin-bottom: 20px; }
+  .about-text p strong { color: var(--olive-dark); font-weight: 500; }
+
+  .stat-stack { display: flex; flex-direction: column; gap: 2px; }
+
+  .stat-card {
+    background: var(--olive-dark);
+    padding: 32px 36px;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.2s;
+  }
+  .stat-card:hover { transform: translateX(6px); }
+  .stat-card::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background: var(--accent); }
+
+  .stat-num { font-family: 'Bebas Neue', sans-serif; font-size: 52px; color: var(--accent-light); line-height: 1; }
+  .stat-label { font-size: 12px; color: var(--sand); letter-spacing: 1px; text-transform: uppercase; margin-top: 4px; }
+
+  .services-section { background: var(--olive-dark); max-width: 100%; padding: 0; }
+  .services-inner { max-width: 1100px; margin: 0 auto; padding: 100px 40px; }
+  .services-section .section-title { color: var(--white); }
+  .services-section .section-label { color: var(--accent-light); }
+  .services-section .section-intro { color: var(--sand); }
+
+  .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2px; margin-top: 60px; }
+
+  .service-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.07);
+    padding: 44px 36px;
+    transition: background 0.25s, transform 0.2s;
+    cursor: default;
+  }
+  .service-card:hover { background: rgba(255,255,255,0.08); transform: translateY(-4px); }
+
+  .service-tier { font-size: 10px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase; color: var(--accent-light); margin-bottom: 16px; }
+  .service-name { font-family: 'Bebas Neue', sans-serif; font-size: 32px; color: var(--white); margin-bottom: 16px; letter-spacing: 0.5px; }
+  .service-desc { font-size: 14px; line-height: 1.7; color: var(--sand); margin-bottom: 28px; }
+
+  .service-features { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .service-features li { font-size: 13px; color: var(--tan-light); display: flex; align-items: flex-start; gap: 10px; line-height: 1.5; }
+  .service-features li::before { content: '→'; color: var(--accent); flex-shrink: 0; margin-top: 1px; }
+
+  .service-card.featured { background: var(--accent); border-color: var(--accent); }
+  .service-card.featured:hover { background: var(--accent-light); }
+  .service-card.featured .service-tier { color: rgba(255,255,255,0.7); }
+  .service-card.featured .service-name { color: var(--white); }
+  .service-card.featured .service-desc { color: rgba(255,255,255,0.85); }
+  .service-card.featured .service-features li { color: var(--white); }
+  .service-card.featured .service-features li::before { color: var(--white); }
+
+  .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; margin-top: 60px; }
+  .step { position: relative; padding-top: 20px; }
+  .step-num { font-family: 'Bebas Neue', sans-serif; font-size: 72px; color: var(--tan); line-height: 1; margin-bottom: 8px; opacity: 0.5; }
+  .step-title { font-family: 'Source Serif 4', serif; font-weight: 600; font-size: 18px; color: var(--olive-dark); margin-bottom: 10px; }
+  .step-desc { font-size: 14px; line-height: 1.7; color: #5a6348; }
+
+  .why-section { background: var(--olive-dark); max-width: 100%; padding: 0; }
+  .why-inner { max-width: 1100px; margin: 0 auto; padding: 100px 40px; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+  .why-section .section-title { color: var(--white); }
+  .why-section .section-label { color: var(--accent-light); }
+  .why-section .section-intro { color: var(--sand); margin-bottom: 0; }
+
+  .why-list { list-style: none; display: flex; flex-direction: column; gap: 0; }
+  .why-item { padding: 24px 0; border-bottom: 1px solid rgba(255,255,255,0.08); display: flex; gap: 20px; align-items: flex-start; }
+  .why-icon { font-size: 20px; flex-shrink: 0; margin-top: 2px; }
+  .why-item-title { font-weight: 500; color: var(--white); margin-bottom: 4px; font-size: 15px; }
+  .why-item-text { font-size: 13px; color: var(--sand); line-height: 1.6; }
+
+  .contact-section { background: var(--cream); text-align: center; }
+  .contact-section .section-title, .contact-section .section-label, .contact-section .section-intro { margin-left: auto; margin-right: auto; }
+
+  .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 2px; margin-top: 60px; text-align: left; }
+  .contact-card { background: var(--olive-dark); padding: 40px 36px; transition: transform 0.2s; }
+  .contact-card:hover { transform: translateY(-4px); }
+  .contact-card-icon { font-size: 28px; margin-bottom: 16px; }
+  .contact-card-label { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--accent-light); margin-bottom: 8px; }
+  .contact-card-value { font-family: 'Source Serif 4', serif; font-size: 16px; color: var(--white); line-height: 1.5; }
+  .contact-card-note { font-size: 12px; color: var(--sand); margin-top: 6px; }
+
+  footer { background: var(--charcoal); padding: 32px 40px; text-align: center; }
+  .footer-name { font-family: 'Bebas Neue', sans-serif; font-size: 22px; color: var(--accent); letter-spacing: 2px; margin-bottom: 8px; }
+  .footer-text { font-size: 12px; color: rgba(255,255,255,0.35); letter-spacing: 0.5px; }
+
+  .divider { width: 60px; height: 3px; background: var(--accent); margin: 24px 0 40px; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (max-width: 768px) {
+    .about-grid { grid-template-columns: 1fr; gap: 40px; }
+    .why-inner { grid-template-columns: 1fr; gap: 48px; }
+    .trust-bar { gap: 24px; }
+    section { padding: 72px 24px; }
+    .services-inner, .why-inner { padding: 72px 24px; }
+    .hero-inner { padding: 72px 24px 100px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="badge">US Military Housing — Poznań, Poland</div>
+    <h1>Garrison<span>Housing Solutions</span></h1>
+    <p class="hero-sub">Veteran-run housing support for US service members stationed at Camp Kościuszko. We handle the rental market so you don't have to.</p>
+    <div class="hero-ctas">
+      <a href="#contact" class="btn-primary">Get Housing Help</a>
+      <a href="#services" class="btn-outline">Our Services</a>
+    </div>
+  </div>
+</div>
+
+<div class="trust-bar">
+  <div class="trust-item">Veteran Owned & Operated</div>
+  <div class="trust-item">Military Clause Leases</div>
+  <div class="trust-item">Polish Language Support</div>
+  <div class="trust-item">Housing Office Approved</div>
+</div>
+
+<section id="about">
+  <div class="section-label">Who We Are</div>
+  <div class="section-title">Built by a Vet,<br>for the Troops</div>
+  <div class="divider"></div>
+  <div class="about-grid">
+    <div class="about-text">
+      <p>Garrison Housing Solutions was founded by a <strong>US Army veteran living in Poznań</strong> who understands exactly what it's like to navigate a foreign country with days to find a place to live.</p>
+      <p>We know the OHA system. We know what a military clause needs to say. We know which neighborhoods work for families stationed at Camp Kościuszko — and which ones don't.</p>
+      <p>Our <strong>bilingual team</strong> handles all communication with Polish landlords and property managers on your behalf, so language is never a barrier when something goes wrong.</p>
+      <p>Whether you're arriving on PCS orders or a landlord looking for reliable military tenants, we bridge the gap — professionally and efficiently.</p>
+    </div>
+    <div class="stat-stack">
+      <div class="stat-card">
+        <div class="stat-num">5,000+</div>
+        <div class="stat-label">Additional US Troops Coming to Poland</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">0</div>
+        <div class="stat-label">On-Post Housing Units Available at Camp Kościuszko</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">48hrs</div>
+        <div class="stat-label">Time Soldiers Have to Find Housing Upon Arrival</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="services-section" id="services">
+  <div class="services-inner">
+    <div class="section-label">What We Offer</div>
+    <div class="section-title">Choose Your<br>Support Level</div>
+    <p class="section-intro">Two clear packages. No surprises. Priced fairly for the PCS reality.</p>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-tier">Basic Package</div>
+        <div class="service-name">Find & Settle</div>
+        <div class="service-desc">Everything you need to get into a vetted apartment fast, with the right paperwork from day one.</div>
+        <ul class="service-features">
+          <li>Apartment search near Camp Kościuszko</li>
+          <li>Military clause lease preparation</li>
+          <li>Housing Services Office coordination</li>
+          <li>Landlord negotiation in Polish</li>
+          <li>Move-in walkthrough & documentation</li>
+          <li>OHA paperwork guidance</li>
+        </ul>
+      </div>
+      <div class="service-card featured">
+        <div class="service-tier">★ Full Service Package</div>
+        <div class="service-name">Find, Settle & Stay Covered</div>
+        <div class="service-desc">Everything in Basic, plus ongoing bilingual liaison for the full duration of your tour. Focus on the mission — we handle the landlord.</div>
+        <ul class="service-features">
+          <li>Everything in the Basic package</li>
+          <li>Dedicated Polish-speaking property liaison</li>
+          <li>Maintenance requests handled in Polish</li>
+          <li>Landlord dispute mediation</li>
+          <li>Lease renewal negotiation</li>
+          <li>Move-out inspection support</li>
+        </ul>
+      </div>
+      <div class="service-card">
+        <div class="service-tier">For Landlords</div>
+        <div class="service-name">Military Tenant Placement</div>
+        <div class="service-desc">Reliable, government-backed tenants. We handle all the coordination — you collect rent.</div>
+        <ul class="service-features">
+          <li>Military-ready lease structuring</li>
+          <li>Tenant vetting & placement</li>
+          <li>Ongoing bilingual communication</li>
+          <li>Housing Office registration support</li>
+          <li>Long-term tenant relationships</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section id="how">
+  <div class="section-label">The Process</div>
+  <div class="section-title">Simple From<br>Day One</div>
+  <div class="divider"></div>
+  <p class="section-intro">We've cut through the confusion so you can focus on settling in.</p>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">01</div>
+      <div class="step-title">Contact Us Before You Arrive</div>
+      <div class="step-desc">Reach out as soon as you have your PCS orders. We'll start lining up vetted properties matched to your rank, BAH, and family size.</div>
+    </div>
+    <div class="step">
+      <div class="step-num">02</div>
+      <div class="step-title">We Find Your Apartment</div>
+      <div class="step-desc">We source options near Camp Kościuszko, negotiate in Polish, and ensure every lease includes the mandatory military clause.</div>
+    </div>
+    <div class="step">
+      <div class="step-num">03</div>
+      <div class="step-title">Housing Office Coordinated</div>
+      <div class="step-desc">We walk your paperwork through the Housing Services Office so your OHA is processed correctly and on time.</div>
+    </div>
+    <div class="step">
+      <div class="step-num">04</div>
+      <div class="step-title">Ongoing Support</div>
+      <div class="step-desc">Full Service clients have a direct bilingual liaison for maintenance, landlord issues, or anything that comes up during your tour.</div>
+    </div>
+  </div>
+</section>
+
+<div class="why-section">
+  <div class="why-inner">
+    <div>
+      <div class="section-label">Why Garrison</div>
+      <div class="section-title">We've Lived<br>What You're<br>Walking Into</div>
+      <p class="section-intro">This isn't a property agency that added "military" to their website. This is a veteran who built a solution to a problem he saw firsthand.</p>
+    </div>
+    <ul class="why-list">
+      <li class="why-item">
+        <span class="why-icon">🎖️</span>
+        <div>
+          <div class="why-item-title">Veteran-Owned</div>
+          <div class="why-item-text">Founded and run by a US Army veteran. We speak your language — literally and figuratively.</div>
+        </div>
+      </li>
+      <li class="why-item">
+        <span class="why-icon">🇵🇱</span>
+        <div>
+          <div class="why-item-title">Bilingual Polish Support</div>
+          <div class="why-item-text">Our Polish-speaking team member handles all landlord and maintenance communication so nothing gets lost in translation.</div>
+        </div>
+      </li>
+      <li class="why-item">
+        <span class="why-icon">📋</span>
+        <div>
+          <div class="why-item-title">Military Clause Expertise</div>
+          <div class="why-item-text">Every lease we handle includes the correct military clause. We know what the Housing Office requires before they ask.</div>
+        </div>
+      </li>
+      <li class="why-item">
+        <span class="why-icon">📍</span>
+        <div>
+          <div class="why-item-title">Local, On-the-Ground</div>
+          <div class="why-item-text">We live in Poznań. We know which buildings work for families, which are close to base, and which landlords are reliable.</div>
+        </div>
+      </li>
+      <li class="why-item">
+        <span class="why-icon">⚡</span>
+        <div>
+          <div class="why-item-title">Fast Turnaround</div>
+          <div class="why-item-text">We know you have 48 hours. We work on your timeline, not a standard agency timeline.</div>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<section id="contact" class="contact-section">
+  <div class="section-label">Get In Touch</div>
+  <div class="section-title">Ready to Get<br>Settled In?</div>
+  <div class="divider" style="margin-left:auto;margin-right:auto;"></div>
+  <p class="section-intro">Contact us before you arrive. The sooner we know your timeline, the better we can set you up.</p>
+  <div class="contact-grid">
+    <div class="contact-card">
+      <div class="contact-card-icon">📧</div>
+      <div class="contact-card-label">Email</div>
+      <div class="contact-card-value">info@garrisonhousingsolutions.com</div>
+      <div class="contact-card-note">We respond within 24 hours</div>
+    </div>
+    <div class="contact-card">
+      <div class="contact-card-icon">📱</div>
+      <div class="contact-card-label">WhatsApp / Signal</div>
+      <div class="contact-card-value">+48 000 000 000</div>
+      <div class="contact-card-note">Preferred for quick questions</div>
+    </div>
+    <div class="contact-card">
+      <div class="contact-card-icon">📍</div>
+      <div class="contact-card-label">Location</div>
+      <div class="contact-card-value">Poznań, Poland</div>
+      <div class="contact-card-note">Serving Camp Kościuszko & surrounding areas</div>
+    </div>
+    <div class="contact-card">
+      <div class="contact-card-icon">🕐</div>
+      <div class="contact-card-label">Availability</div>
+      <div class="contact-card-value">Mon – Fri, 8am – 6pm CET</div>
+      <div class="contact-card-note">Emergency support for arriving soldiers</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-name">GARRISON HOUSING SOLUTIONS</div>
+  <div class="footer-text">Veteran-owned · Poznań, Poland · Serving US Military at Camp Kościuszko</div>
+</footer>
+
+</body>
+</html>
